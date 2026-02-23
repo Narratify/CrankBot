@@ -1,0 +1,15 @@
+[Unit]
+Description=CrankBot API Server
+After=network.target
+
+[Service]
+Type=simple
+User=your-user
+WorkingDirectory=/path/to/crankbot/api
+EnvironmentFile=/path/to/crankbot/api/.env
+ExecStart=/path/to/crankbot/api/venv/bin/uvicorn server:app --host 127.0.0.1 --port 8000
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

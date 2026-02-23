@@ -1,0 +1,6 @@
+name=CrankBot
+author=Enchan
+description=AI chatbot for Playdate — talk to Claude with the crank
+bundleID=com.narratify.crankbot
+version=1.0.0
+buildNumber=1

@@ -1,0 +1,20 @@
+# Compiled output
+*.pdx/
+CrankBot.pdx/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Simulator
+.sentry-native/
+server.py

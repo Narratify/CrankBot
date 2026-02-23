@@ -1,0 +1,28 @@
+# Compiled Playdate output
+*.pdx/
+
+# Python
+venv/
+__pycache__/
+*.pyc
+.env
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Playdate Simulator
+.sentry-native/
+
+# Project-specific
+CLAUDE.md
+docs/
