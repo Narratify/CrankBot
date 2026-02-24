@@ -2,7 +2,7 @@
 """
 CrankBot API Server
 Receives HTTP requests from Playdate and queries an LLM.
-Supports: claude -p (CLI), OpenAI-compatible APIs (OpenAI, Gemini, Groq, OpenRouter, Qwen, etc.)
+Supports any OpenAI-compatible API (Anthropic, OpenAI, Gemini, Groq, OpenRouter, Qwen, etc.)
 Always returns HTTP 200 (Playdate SDK bug: non-200 breaks callback).
 """
 
@@ -22,11 +22,9 @@ security = HTTPBearer()
 TOKEN = os.environ.get("API_TOKEN", "")
 
 # LLM config
-LLM_PROVIDER = os.environ.get("LLM_PROVIDER", "claude-cli")  # claude-cli | openai
-LLM_BASE_URL = os.environ.get("LLM_BASE_URL", "https://api.openai.com/v1")
+LLM_BASE_URL = os.environ.get("LLM_BASE_URL", "https://api.anthropic.com/v1")
 LLM_API_KEY = os.environ.get("LLM_API_KEY", "")
-LLM_MODEL = os.environ.get("LLM_MODEL", "gpt-4o-mini")
-CLAUDE_PATH = os.environ.get("CLAUDE_PATH", "claude")
+LLM_MODEL = os.environ.get("LLM_MODEL", "claude-sonnet-4-20250514")
 TIMEOUT = int(os.environ.get("TIMEOUT", "120"))
 MAX_TOKENS = int(os.environ.get("MAX_TOKENS", "256"))
 
@@ -71,23 +69,8 @@ def build_messages(history, current_message):
     return messages
 
 
-def build_prompt_text(history, current_message):
-    """Build plain text prompt for claude -p."""
-    lines = []
-    for entry in history:
-        role = entry.get("role", "")
-        content = entry.get("content", "")
-        if role == "user":
-            lines.append(f"User: {content}")
-        elif role == "assistant":
-            lines.append(f"Assistant: {content}")
-    lines.append(f"User: {current_message}")
-    lines.append("Assistant:")
-    return "\n".join(lines)
-
-
-async def query_openai(history, message):
-    """Query OpenAI-compatible API."""
+async def query_llm(history, message):
+    """Query LLM via OpenAI-compatible API."""
     client = get_openai_client()
     messages = build_messages(history, message)
 
@@ -98,21 +81,6 @@ async def query_openai(history, message):
         max_tokens=MAX_TOKENS,
     ))
     return response.choices[0].message.content.strip()
-
-
-async def query_claude_cli(history, message):
-    """Query via claude -p subprocess."""
-    full_prompt = build_prompt_text(history, message)
-    proc = await asyncio.create_subprocess_exec(
-        CLAUDE_PATH, "-p", full_prompt, "--system-prompt", SYSTEM_PROMPT,
-        stdout=asyncio.subprocess.PIPE,
-        stderr=asyncio.subprocess.PIPE,
-    )
-    stdout, stderr = await asyncio.wait_for(proc.communicate(), timeout=TIMEOUT)
-    if proc.returncode != 0:
-        err = stderr.decode().strip()
-        raise RuntimeError(err[:200])
-    return stdout.decode().strip()
 
 
 @app.post("/chat")
@@ -127,14 +95,10 @@ async def chat(req: Request, _=Depends(verify)):
         return {"response": "[Error] Empty message", "error": True}
 
     history = body.get("history", [])
-    logging.info(f"Request: {message[:80]}... (provider={LLM_PROVIDER}, model={LLM_MODEL}, history={len(history)})")
+    logging.info(f"Request: {message[:80]}... (model={LLM_MODEL}, history={len(history)})")
 
     try:
-        if LLM_PROVIDER == "openai":
-            response_text = await asyncio.wait_for(query_openai(history, message), timeout=TIMEOUT)
-        else:
-            response_text = await query_claude_cli(history, message)
-
+        response_text = await asyncio.wait_for(query_llm(history, message), timeout=TIMEOUT)
         logging.info(f"Response: {len(response_text)} chars")
         return {"response": response_text}
 
@@ -150,6 +114,5 @@ async def chat(req: Request, _=Depends(verify)):
 async def health():
     return {
         "status": "healthy",
-        "provider": LLM_PROVIDER,
-        "model": LLM_MODEL if LLM_PROVIDER == "openai" else "claude-cli",
+        "model": LLM_MODEL,
     }

@@ -1,18 +1,24 @@
 # CrankBot
 
-> AI chatbot for [Playdate](https://play.date/) — talk to Claude with the crank.
+> AI chatbot for [Playdate](https://play.date/) — talk to AI with the crank.
 
-CrankBot lets you have conversations with an AI (Claude) directly on your Playdate handheld. Type a message using the on-screen keyboard, and get AI-powered responses on the 400x240 1-bit display.
+CrankBot lets you have conversations with an AI directly on your Playdate handheld. Type a message using the on-screen keyboard, and get AI-powered responses on the 400x240 1-bit display.
 
 ## How It Works
 
 ```
-Playdate (Lua) ──HTTPS──▶ API Server (Python/FastAPI) ──▶ Claude CLI
+Playdate (Lua) ──HTTPS──▶ API Server (Python/FastAPI) ──▶ LLM API
 ```
 
 1. **Playdate app** — Sends your message to the API server over HTTPS
-2. **API server** — Receives the request, calls `claude -p`, returns the response
+2. **API server** — Receives the request, queries the LLM API, returns the response
 3. **Playdate app** — Displays the AI response with crank-based scrolling
+
+The server uses the OpenAI-compatible chat completions format, so it works with many providers:
+- **Anthropic** (Claude) — via API key
+- **OpenAI** (GPT)
+- **Google** (Gemini)
+- **Groq**, **OpenRouter**, **Qwen**, and others
 
 ## Project Structure
 
@@ -42,8 +48,19 @@ CrankBot/
 2. Set environment variables:
    ```bash
    export API_TOKEN="your-secret-token"
-   export CLAUDE_PATH="/path/to/claude"  # defaults to "claude" (must be in PATH)
-   export TIMEOUT=120  # seconds, optional
+   export LLM_API_KEY="your-api-key"
+
+   # Anthropic (default)
+   export LLM_BASE_URL="https://api.anthropic.com/v1"
+   export LLM_MODEL="claude-sonnet-4-20250514"
+
+   # Or: OpenAI
+   export LLM_BASE_URL="https://api.openai.com/v1"
+   export LLM_MODEL="gpt-4o-mini"
+
+   # Or: any OpenAI-compatible provider
+   export LLM_BASE_URL="https://your-provider.com/v1"
+   export LLM_MODEL="model-name"
    ```
 
 3. Run:
@@ -72,7 +89,7 @@ CrankBot/
 ## Requirements
 
 - [Playdate](https://play.date/) with firmware supporting `playdate.network.http`
-- A server running the API with [Claude CLI](https://docs.anthropic.com/en/docs/claude-code) installed
+- A server running the API with an LLM API key (Anthropic, OpenAI, etc.)
 - HTTPS endpoint accessible from Playdate (e.g., via reverse proxy)
 
 ## Note
