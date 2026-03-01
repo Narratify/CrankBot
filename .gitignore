@@ -26,3 +26,6 @@ desktop.ini
 # Project-specific
 CLAUDE.md
 docs/
+!docs/demo.gif
+!docs/demo.mp4
+.secrets/
