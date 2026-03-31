@@ -2,6 +2,7 @@
   <img src="https://img.shields.io/badge/platform-Playdate-yellow?style=flat-square" alt="Playdate">
   <img src="https://img.shields.io/badge/language-Lua-blue?style=flat-square" alt="Lua">
   <img src="https://img.shields.io/badge/server-Python%2FFastAPI-green?style=flat-square" alt="Python/FastAPI">
+  <img src="https://img.shields.io/badge/Built%20with-Claude-blueviolet?style=flat-square" alt="Built with Claude">
   <img src="https://img.shields.io/badge/license-MIT-brightgreen?style=flat-square" alt="MIT License">
 </p>
 
@@ -149,10 +150,14 @@ CrankBot/
 
 ## About
 
-CrankBot is made by [AI-MY](https://ai-my.net) under the theme of *anti-innovation / rediscovery* — using technology to rediscover what progress has overlooked.
+We wanted to put AI on the most delightfully constrained hardware we could find. The Playdate — 400×240, 1-bit, crank-operated — won. No streaming, no regenerate button, no infinite scroll. Just you, a crank, and whatever the LLM has to say.
 
-Every AI interface converges on the same design. CrankBot goes the other way: a 400×240 1-bit screen, a mechanical crank, and every word read deliberately.
+Made with Claude at [AI-MY](https://ai-my.net).
 
 ## License
 
 MIT — see [LICENSE](LICENSE)
+
+## Articles
+
+- [Playdate×AI でコミュニティボットを作った](https://zenn.dev/enchan/articles/playdate-ai-community-bot) — Zenn（2026-02-27）

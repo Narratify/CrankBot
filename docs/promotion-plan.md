@@ -1,56 +1,133 @@
 # CrankBot プロモーション計画
 
-詳細な調査データは `marketing-research.md` を参照。
+**最終更新**: 2026-02-27
+**調査レポート**: `outputs/2026-02-27-marketing-platform-research-UTR.md`
 
-## ターゲットコミュニティ
+## 核心戦略: DIYハードウェアとしてフレーミングする
 
-| プラットフォーム | チャネル | 購読者/規模 | 特徴 |
-|------------------|----------|-------------|------|
-| Twitter/X | #playdate #playdatedev | 広域 | スレッド+動画必須。メディア・開発者へのリーチ |
-| Reddit | r/PlaydateConsole | ~5,200人 | 動画/GIFが伸びやすい。Panic社員も参加 |
-| Playdate DevForum | devforum.play.date | 開発者中心 | Show & Tell。技術詳細が好まれる |
-| Discord | Playdate Squad | ~9,500人 | 最もフレンドリー。devlog形式 |
-| Hacker News | Show HN | テック層 | AI×レトロのギャップが刺さる。ブログ記事必須 |
-| 日本語圏 | Twitter/Zenn/Qiita | — | 日本語記事で技術者層にリーチ |
+> Show HNで「AIプロジェクト」は死の象限。「DIY Hardwareプロジェクト」が全カテゴリ1位。
+> CrankBotは**AIチャットボットではなく、クランク付きゲーム機で動くAI**として見せる。
 
-## 投稿スケジュール
+---
 
-### Phase 0: 事前準備
+## ターゲットコミュニティ & 投稿方法
+
+| プラットフォーム | 投稿方法 | 状態 | 優先度 |
+|------------------|----------|------|--------|
+| **Twitter/X** (@_null) | API (tweepy) | ✅ API準備完了 | 最優先 |
+| **Hacker News** (Enchan) | Playwright | karma 1（要蓄積） | 最優先 |
+| **Dev.to** (enchan) | 手動 or API | ✅ 作成済み | 高 |
+| **Hashnode** (@enchan) | 手動 | ✅ 作成済み | 高（canonical元） |
+| **Zenn** (enchan) | 手動 | ✅ 作成済み | 高（日本語最優先） |
+| **Substack** (@aimynoawai) | 手動 | ✅ 作成済み（AI-MY名義） | 高 |
+| **Playdate DevForum** (enchan) | Playwright | ✅ 作成済み | 高 |
+| **Playdate Squad Discord** | 手動（参加後） | 未参加・後回し | 中 |
+| **Reddit** | Playwright | API事前審査制で断念 | 中 |
+| **Qiita** | 手動 | 未確認 | 中 |
+| **Medium** | 手動 | 未確認 | 低 |
+| **note** | 手動 | 未確認 | 低 |
+| **itch.io** | 手動 | 未確認 | 中（PDX配布） |
+
+### API不要のプラットフォームはPlaywrightで自動化
+Reddit / Discord / DevForum / HN など、API提供がないか制限のあるプラットフォームはPlaywrightで操作する。
+
+---
+
+## ローンチスケジュール
+
+### Phase 0: 事前準備（D-7〜D-1）
 
 - [x] 動画撮影済み
 - [x] 英語ブログ記事公開済み (shura.ai-my.net/pub/blog/crankbot.html)
 - [x] 日本語ブログ記事公開済み (shura.ai-my.net/pub/blog/crankbot-ja.html)
-- [ ] DevForumアカウント作成 + コミュニティ参加（数日コメント）
-- [ ] HN karma確認（250+推奨）
+- [x] Twitter API設定完了 (@_null)
+- [x] HNアカウント作成 (Enchan)
+- [ ] README完成（GIF/動画、バッジ、Quick Start、アーキテクチャ図）
+- [ ] デモGIF作成（クランク操作の実機映像、10秒以内）
+- [ ] HN karmaを最低30+まで蓄積（コメント活動）
+- [x] Hashnodeアカウント作成 (@enchan)
+- [x] Dev.toアカウント作成 (enchan)
+- [x] Zennアカウント作成 (enchan)
+- [x] DevForumアカウント作成 (enchan)
+- [x] Substackアカウント作成 (@aimynoawai, AI-MY名義)
+- [x] テクニカル記事の英語版執筆（Dev.to/Hashnode用、writingスキル適用済み）
+- [x] テクニカル記事の日本語版執筆（Zenn用、writingスキル+kisha校閲済み）
+- [ ] Hashnodeカスタムドメイン設定 → canonical元
+- [ ] DevForumコミュニティ参加（投稿前に数件コメント）
+- [ ] 各プラットフォームのプロフィール設定（social-accounts.md参照）
 
-### Phase 1: ローンチ日（火曜 or 水曜）
+### Phase 1: ローンチ日（D-Day、火〜木）
 
-| 順序 | 時間 (EST/JST) | プラットフォーム | 形式 |
-|------|---------------|-----------------|------|
-| 1 | 9:00 AM EST / 23:00 JST | Twitter/X | 7ツイートスレッド + 動画 |
-| 2 | 10:00-11:00 AM EST | Reddit r/PlaydateConsole | 動画投稿 + テキスト |
-| 3 | 同日 | Playdate DevForum | 長文 + 動画 + 技術詳細 |
+| 順序 | 時間 | プラットフォーム | 形式 |
+|------|------|-----------------|------|
+| 1 | 15:00-21:00 JST (6AM-12PM UTC) | **Show HN** | ブログ記事URL + 背景コメント |
+| 2 | 同時 | **X/Twitter** | GIF/動画付きスレッド（英語） |
+| 3 | 同日 | **Dev.to** | クロスポスト（canonical→Hashnode） |
 
-### Phase 2: 拡張（Day 2-5）
+**Show HNタイトル候補**:
+```
+Show HN: CrankBot – An AI chatbot for the Playdate handheld (crank to scroll responses)
+```
+
+### Phase 2: 拡張（D+1〜D+3）
+
+| 順序 | プラットフォーム | 形式 |
+|------|-----------------|------|
+| 4 | Playdate DevForum | Show & Tell 長文 + 動画 |
+| 5 | X/Twitter 日本語 | 日本語スレッド + 動画 |
+| 6 | Reddit r/PlaydateConsole | 動画投稿 + テキスト（手動/Playwright） |
+| 7 | Reddit r/IndieGaming, r/programming | クロスポスト |
+
+### Phase 3: 日本語展開（D+3〜D+7）
 
 | 順序 | プラットフォーム | 切り口 |
 |------|-----------------|--------|
-| 4 | Reddit r/IndieGaming, r/indiegames | AI on retro hardware |
-| 5 | Twitter 日本語スレッド | PlaydateからAIと会話 |
-| 6 | Reddit r/programming | 技術的な側面 |
+| 8 | **Zenn** | テクニカル記事（日本語、canonical元） |
+| 9 | **Qiita** | クロスポスト |
+| 10 | Medium | 英語ストーリー記事 |
+| 11 | note | カジュアル読み物（日本語） |
 
-### Phase 3: Hacker News（Day 4-5、土曜推奨）
+### Phase 4: 継続（D+7〜）
 
-| 時間 | 形式 | 注意 |
-|------|------|------|
-| 土曜 11:00 AM Pacific / 日曜 4:00 JST | Show HN + ブログ記事URL | 投稿後2時間はHNに張り付く |
+- Playdate Squad Discord 参加・投稿
+- itch.io にPDX配布
+- フィードバック反映 → 更新告知
 
-### Phase 4: Discord + 継続（Day 7-14）
+---
 
-| プラットフォーム | 形式 |
-|-----------------|------|
-| Playdate Squad Discord | devlogスレッド、フィードバック反映済み |
-| Zenn/Qiita | 日本語技術記事 |
+## クロスポスト戦略（canonical URL管理）
+
+**原則: 1記事を複数プラットフォームに、canonical URLで重複ペナルティ回避**
+
+### 英語記事
+```
+Hashnode（自ドメイン）← canonical元
+  ├→ Dev.to（クロスポスト、canonical→Hashnode）
+  └→ Medium（クロスポスト、canonical→Hashnode）
+```
+
+### 日本語記事
+```
+Zenn ← canonical元
+  └→ Qiita（クロスポスト、canonical→Zenn）
+note は切り口を変えて別記事（カジュアル読み物）
+```
+
+---
+
+## コンテンツ戦略: 1ネタ3バリエーション
+
+**A. テクニカル記事**（Dev.to / Hashnode / Zenn / Qiita向け）
+- タイトル例: "Building an AI chatbot for Playdate's 400x240 1-bit display"
+- 内容: アーキテクチャ、Lua実装、FastAPI連携、LLM API最適化
+
+**B. ストーリー記事**（Medium / note向け）
+- タイトル例: "I put ChatGPT on a tiny crank-powered game console"
+- 内容: なぜ作ったか、制約の面白さ、Lo-Fi AIの思想
+
+**C. Show HN/Twitter向け**
+- 短く、ビジュアル重視、GIF必須
+- フレーミング: ハードウェア × 制約 × 意外性
 
 ---
 
@@ -201,7 +278,7 @@ Thanks for checking it out!
 ### 5. Hacker News (Show HN)
 
 ```
-Title: Show HN: CrankBot – Lo-Fi AI on a crank-powered 400x240 1-bit handheld
+Title: Show HN: CrankBot – An AI chatbot for the Playdate handheld (crank to scroll responses)
 
 URL: shura.ai-my.net/pub/blog/crankbot.html
 
@@ -216,7 +293,7 @@ GitHub: https://github.com/Narratify/CrankBot
 License: MIT
 ```
 
-### 6. Reddit クロスポスト用 (r/IndieGaming, r/programming)
+### 6. Reddit クロスポスト用
 
 ```
 Title (r/IndieGaming): Lo-Fi AI — chatbot on a 400x240 1-bit crank-powered handheld
@@ -230,23 +307,43 @@ Title (r/programming): Every AI interface looks the same. I put one on a 400x240
 
 ---
 
-## 必要なアカウント
+## アカウント情報
 
-| プラットフォーム | 必要？ | 備考 |
-|-----------------|--------|------|
-| Twitter/X | 要確認 | えんちゃんの既存アカウント or 新規 |
-| Reddit | 要確認 | 新規の場合、投稿制限に注意 |
-| Playdate DevForum | 新規作成 | 事前に数日コメントが必要 |
-| Hacker News | 要確認 | karma 250+推奨 |
-| Discord (Playdate Squad) | 要確認 | discord.com/invite/zFKagQ2 |
+**詳細は `/home/agent/narratify/core/marketing/` を参照**（ペルソナ別分類・認証情報・導線設計・プロフィール設定）
+
+| プラットフォーム | 名義 | アカウント | 投稿方法 | 状態 |
+|-----------------|------|-----------|---------|------|
+| Twitter/X | えんちゃん | @_null | API (tweepy) | ✅ 稼働中 |
+| Hacker News | えんちゃん | Enchan | Playwright | ✅ karma 1 |
+| Dev.to | えんちゃん | enchan | 手動/API | ✅ 作成済み |
+| Hashnode | えんちゃん | @enchan | 手動 | ✅ 作成済み |
+| Zenn | えんちゃん | enchan | 手動 | ✅ 作成済み |
+| DevForum | えんちゃん | enchan | Playwright | ✅ 作成済み |
+| Substack | AI-MY | @aimynoawai | 手動 | ✅ 作成済み |
+| Reddit | えんちゃん | — | Playwright | 🔶 後回し |
+| Discord | えんちゃん | — | 手動 | 🔶 後回し |
+
+---
 
 ## KPI目標
 
 | プラットフォーム | 現実的目標 | 上振れ期待値 |
 |-----------------|-----------|-------------|
+| **Show HN** | 20-50 points | 100+ (フロントページ → 10K-30K visitors) |
 | Twitter/X | 50-200 いいね、20-50 RT | 500+ (バイラル時) |
 | Reddit r/PlaydateConsole | 30-100 upvotes | 200+ |
 | Playdate DevForum | 10-30 リプライ | Panic社員からの言及 |
-| Hacker News | 20-50 points | 100+ (フロントページ到達) |
 | GitHub Stars (初週) | 30-100 | 289+ (HNフロントページ到達時) |
 | Discord | 5-15 リアクション | — |
+| Dev.to | 1,500-5,000 views | — |
+| Zenn | SEO経由で長期的な流入 | 日本語Playdate記事でSEO独占 |
+
+---
+
+## リスク & 注意点
+
+1. **HN AI疲れ**: タイトルに「AI」を入れるなら、必ず「Playdate」「crank」など物理要素とセット
+2. **HN投票リング検出**: アップボートを絶対に他人に頼まない
+3. **Reddit API制限**: Responsible Builder Policy（2025年11月〜）により自動投稿困難
+4. **canonical忘れ**: クロスポスト時に必ずcanonical URLを設定（SEOペナルティ回避）
+5. **Playdate市場規模**: 70,000台。ニッチチャネルだけではリーチに限界。一般テック層へのリーチが重要
