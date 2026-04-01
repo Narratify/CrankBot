@@ -1,0 +1,42 @@
+1/ Every AI interface looks the same. Text box. Send button. Browser.
+
+I went the other way — put AI on a 400x240 1-bit screen where you scroll with a mechanical crank.
+---
+2/ How it works:
+- Type on the on-screen keyboard
+- Playdate sends it over HTTPS to a self-hosted server
+- Server calls any LLM API (Claude, GPT, Gemini, etc.)
+- You crank through the response, one line at a time
+
+~500 lines of Lua + ~80 lines of Python.
+---
+3/ The crank changes everything.
+
+No streaming tokens. No progress bars. You wait. The response arrives. You physically crank through it on a tiny monochrome screen.
+
+You actually read every word. That almost never happens with AI anymore.
+---
+4/ Tech stack:
+- Playdate app: Lua (Playdate SDK)
+- API server: Python / FastAPI
+- AI: Any OpenAI-compatible API (Claude, GPT, Gemini, Groq, etc.)
+- Communication: HTTPS + Bearer token auth
+
+Bring your own API key.
+---
+5/ At AI-MY we build under the theme "anti-innovation / rediscovery" — tech to rediscover what progress overlooked.
+
+Our Lo-Fi Camera prints pixel art on thermal paper. CrankBot does the same for AI — strips everything away, leaves only the words.
+---
+6/ Fully open source (MIT):
+github.com/Narratify/CrankBot
+
+Self-host your own API server. Works with any LLM provider.
+
+Your Playdate, your AI, your server.
+---
+7/ What would you ask AI if you had to crank through every line of its answer?
+
+Blog post: shura.ai-my.net/pub/blog/crankbot.html
+
+#playdate #playdatedev #AI #opensource
